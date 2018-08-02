@@ -3,6 +3,8 @@ const hbs=require('hbs');
 const fs=require('fs');
 var app = express();
 
+const port = process.env.PORT || 3000;  // check for heroku port enviroment variable
+
 hbs.registerPartials(__dirname+'/views/partials');
 app.set('view engine', 'hbs');
 app.use(express.static(__dirname+'/public'));
@@ -38,4 +40,6 @@ app.get('/about', (req, res) => {   // route http request
     res.render("about.hbs", { });
 });
 
-app.listen(3000);  // listen to port
+app.listen(port, () => {
+    console.log(`Server running on port ${port}`);
+});  // listen to port
